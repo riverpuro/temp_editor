@@ -8,9 +8,9 @@ Gem::Specification.new do |gem|
   gem.version       = TempEditor::VERSION
   gem.authors       = ["riverpuro"]
   gem.email         = ["riverpuro@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.description   = %q{Edit temporary file with ENV['EDITOR']}
+  gem.summary       = %q{Edit temporary file with ENV['EDITOR']}
+  gem.homepage      = "https://github.com/riverpuro/temp_editor"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }

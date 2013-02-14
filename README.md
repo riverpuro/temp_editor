@@ -1,6 +1,6 @@
 # TempEditor
 
-TODO: Write a gem description
+Edit temporary file with ENV['EDITOR'].
 
 ## Installation
 
@@ -18,7 +18,23 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+1. Initialize TempEditor with Tempfile constructor arguments.
+2. Register callback: before editing, after editing or both.
+3. Make enduser edit tempfile.
+
+  editor = TempEditor.new(['prefix', '.extension'])
+  # Resister before editing callback:
+  editor.before do |tempfile|
+    tempfile.write("EDIT ME")
+  end
+  # Resister after editing callback:
+  editor.after do |tempfile|
+    puts tempfile.read
+  end
+  # launch editor
+  editor.edit
+
+See also: examples
 
 ## Contributing
 
