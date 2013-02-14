@@ -2,16 +2,21 @@
 require 'spec_helper'
 
 describe TempEditor do
-  before do
-    @temp_editor = TempEditor.new('tempfile_prefix')
+  shared_context "setup common @temp_editor instance" do
+    before do
+      @temp_editor = TempEditor.new('tempfile_prefix')
 
-    @editor_inputs = 'my editor inputs'
+      @editor_inputs = 'my editor inputs'
 
-    mock_editor_command = "echo '#{@editor_inputs}' >"
-    @temp_editor.editor = mock_editor_command
+      mock_editor_command = "echo '#{@editor_inputs}' >"
+      @temp_editor.editor = mock_editor_command
+    end
   end
 
+
   describe "#edit" do
+    include_context "setup common @temp_editor instance"
+
     it "should exec editor" do
       begin
         @temp_editor.edit
@@ -27,6 +32,8 @@ describe TempEditor do
 
 
   describe "#before" do
+    include_context "setup common @temp_editor instance"
+
     it "should be called with opened tempfile" do
       @temp_editor.before do |file|
         file.should_not be_closed
@@ -47,6 +54,8 @@ describe TempEditor do
 
 
   describe "#after" do
+    include_context "setup common @temp_editor instance"
+
     it "should be called with opened tempfile" do
       @temp_editor.after do |file|
         file.should_not be_closed
@@ -97,14 +106,14 @@ describe TempEditor do
       it "should use ENV['EDITOR'] as default" do
         begin
           orignal_env_editor = ENV['EDITOR']
-          orignal_env_editor_inputs = "original editor inputs"
-          ENV['EDITOR'] = "echo '#{orignal_env_editor_inputs}' > "
+          editor_inputs = "original editor inputs"
+          ENV['EDITOR'] = "echo '#{editor_inputs}' > "
 
           @temp_editor.edit
 
           @temp_editor.tempfile.open
           tempfile_contents = @temp_editor.tempfile.read.chomp
-          tempfile_contents.should == orignal_env_editor_inputs
+          tempfile_contents.should == editor_inputs
         ensure
           ENV['EDITOR'] = orignal_env_editor
           @temp_editor.tempfile.close
