@@ -23,7 +23,8 @@ Or install it yourself as:
 3. Make enduser edit tempfile.
 
 ```ruby
-editor = tempeditor.new(['prefix', '.extension'])
+# Initialize TempEditor
+editor = TempEditor.new(['prefix', '.extension'])
 
 # Resister before editing callback:
 editor.before do |tempfile|
