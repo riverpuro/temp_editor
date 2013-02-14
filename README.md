@@ -22,17 +22,20 @@ Or install it yourself as:
 2. Register callback: before editing, after editing or both.
 3. Make enduser edit tempfile.
 
-  editor = TempEditor.new(['prefix', '.extension'])
-  # Resister before editing callback:
-  editor.before do |tempfile|
-    tempfile.write("EDIT ME")
-  end
-  # Resister after editing callback:
-  editor.after do |tempfile|
-    puts tempfile.read
-  end
-  # launch editor
-  editor.edit
+    editor = TempEditor.new(['prefix', '.extension'])
+
+    # Resister before editing callback:
+    editor.before do |tempfile|
+      tempfile.write("EDIT ME")
+    end
+
+    # Resister after editing callback:
+    editor.after do |tempfile|
+      puts tempfile.read
+    end
+
+    # launch editor
+    editor.edit
 
 See also: examples
 
