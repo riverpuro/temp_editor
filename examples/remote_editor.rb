@@ -1,6 +1,4 @@
-# -*- encoding: utf-8 -*-
-
-$LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'lib')
+#!/usr/bin/env ruby
 require 'temp_editor'
 
 class RemoteResource

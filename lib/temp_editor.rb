@@ -1,15 +1,15 @@
 # -*- encoding: utf-8 -*-
 require 'tempfile'
+require 'temp_editor/version'
 
 class TempEditor
-  VERSION = '0.0.1'
-
   class EditorConfigureError < StandardError; end
 
   attr_reader :tempfile
 
-  def initialize(basename, *rest)
+  def initialize(basename, *rest, &after)
     @tempfile = Tempfile.new(basename, *rest)
+    after(&after) if block_given?
   end
 
   def before(&block)

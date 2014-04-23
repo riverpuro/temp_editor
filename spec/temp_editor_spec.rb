@@ -14,6 +14,22 @@ describe TempEditor do
   end
 
 
+  describe '.new' do
+    context 'with callback' do
+      it 'should register after callback' do
+        result = nil
+        editor = TempEditor.new 'example' do |file|
+          result = file.read.chomp
+        end
+        editor.editor = 'echo "text" >'
+
+        expect {
+          editor.edit
+        }.to change{ result }.from(nil).to('text')
+      end
+    end
+  end
+
   describe "#edit" do
     include_context "setup common @temp_editor instance"
 
